@@ -1,0 +1,11 @@
+/**
+ * Created by iKNSA.
+ * User: Khalid Sookia <khalidsookia@gmail.com>
+ * Date: 21/01/2018
+ * Time: 21:50
+ */
+
+'use strict';
+
+phpLightCommentModule.directive('createCommentDirective', [function () {
+}]);

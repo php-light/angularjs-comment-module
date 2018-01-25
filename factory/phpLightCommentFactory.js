@@ -10,9 +10,27 @@
 phpLightCommentModule.factory('phpLightCommentFactory', ['$rootScope', '$http', '$q', function ($rootScope, $http, $q) {
     var phpLightCommentFactory = {};
 
-    phpLightCommentFactory.create = function (comment) {
-        console.log(comment);
+    phpLightCommentFactory.create = function (data) {
+        console.log(data);
         var deferred = $q.defer();
+        var restEndpoint = '';
+
+        if ($rootScope.restUrl) {
+            restEndpoint = $rootScope.restUrl + '?route=comment_create&parent=' + data.parent + "&id=" + data.identifier
+        } else {
+            restEndpoint = '/app.php/?route=comment_create&parent=' + data.parent + "&id=" + data.identifier
+        }
+
+        $http.post(restEndpoint, {comment: data}).then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (error) {
+                deferred.reject(error);
+            }
+        );
+
+        return deferred.promise;
     };
 
     phpLightCommentFactory.findBy = function (filter) {

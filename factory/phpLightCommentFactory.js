@@ -54,5 +54,27 @@ phpLightCommentModule.factory('phpLightCommentFactory', ['$rootScope', '$http', 
         return deferred.promise;
     };
 
+    phpLightCommentFactory.delete = function (commentId) {
+        var deferred = $q.defer();
+        var restEndpoint = '';
+
+        if ($rootScope.restUrl) {
+            restEndpoint = $rootScope.restUrl + '?route=comment_delete';
+        } else {
+            restEndpoint = '/app.php/?route=comment_delete';
+        }
+
+        $http.post(restEndpoint, {commentId: commentId}).then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (error) {
+                deferred.reject(error);
+            }
+        );
+
+        return deferred.promise;
+    };
+
     return phpLightCommentFactory;
 }]);

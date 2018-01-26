@@ -12,28 +12,27 @@ phpLightCommentModule.directive('phpLightCommentDelete',  ['$rootScope', '$parse
         return {
             restrict: 'EA',
             templateUrl: function () {
-                if ($rootScope.phpLight && $rootScope.phpLight.comment && $rootScope.phpLight.comment.deleteTemplate) {
-                    return $rootScope.phpLight.comment.deleteTemplate;
+                if ($rootScope.phpLight && $rootScope.phpLight.comment && $rootScope.phpLight.comment.createTemplate) {
+                    return $rootScope.phpLight.comment.createTemplate;
                 }
 
                 return '/web/vendor/php-light-comment/template/delete.html'
             },
             scope: {
-                comment: 'comment'
+                identifier: '@identifier'
             },
-            link: function (scope) {
-                scope.delete = function (comment) {
-                    // @todo trigger comments reload on success or add to existing comments
-                    // phpLightCommentFactory.delete({comment: comment})
-                    //     .then(
-                    //         function () {
-                    //         },
-                    //         function (error) {
-                    //             console.error(error)
-                    //         }
-                    //     );
+            link: function (scope, element, attributes) {
+                scope.delete = function () {
+                    // @todo trigger comments reload on success or remove comment from comments
+                    phpLightCommentFactory.delete({identifier: attributes.identifier})
+                        .then(
+                            function () {
+                            },
+                            function (error) {
+                                console.error(error)
+                            }
+                        );
                 }
             }
         };
-}]);
-
+    }]);

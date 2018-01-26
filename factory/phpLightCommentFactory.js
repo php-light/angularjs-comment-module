@@ -54,7 +54,7 @@ phpLightCommentModule.factory('phpLightCommentFactory', ['$rootScope', '$http', 
         return deferred.promise;
     };
 
-    phpLightCommentFactory.delete = function (commentId) {
+    phpLightCommentFactory.delete = function (comment) {
         var deferred = $q.defer();
         var restEndpoint = '';
 
@@ -64,7 +64,7 @@ phpLightCommentModule.factory('phpLightCommentFactory', ['$rootScope', '$http', 
             restEndpoint = '/app.php/?route=comment_delete';
         }
 
-        $http.post(restEndpoint, {commentId: commentId}).then(
+        $http.post(restEndpoint, {commentId: comment.id}).then(
             function (response) {
                 deferred.resolve(response.data);
             },

@@ -19,12 +19,12 @@ phpLightCommentModule.directive('phpLightCommentDelete',  ['$rootScope', '$parse
                 return '/web/vendor/php-light-comment/template/delete.html'
             },
             scope: {
-                identifier: '@identifier'
+                id: '@identifier'
             },
             link: function (scope, element, attributes) {
                 scope.delete = function () {
                     // @todo trigger comments reload on success or remove comment from comments
-                    phpLightCommentFactory.delete({identifier: attributes.identifier})
+                    phpLightCommentFactory.delete({id: attributes.identifier})
                         .then(
                             function () {
                             },

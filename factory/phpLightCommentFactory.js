@@ -11,7 +11,6 @@ phpLightCommentModule.factory('phpLightCommentFactory', ['$rootScope', '$http', 
     var phpLightCommentFactory = {};
 
     phpLightCommentFactory.create = function (data) {
-        console.log(data);
         var deferred = $q.defer();
         var restEndpoint = '';
 

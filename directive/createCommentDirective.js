@@ -7,7 +7,7 @@
 
 'use strict';
 
-phpLightCommentModule.directive('createCommentDirective', ['$rootScope', '$parse', 'phpLightCommentFactory',
+phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse', 'phpLightCommentFactory',
     function ($rootScope, $parse, phpLightCommentFactory) {
         return {
             restrict: 'EA',

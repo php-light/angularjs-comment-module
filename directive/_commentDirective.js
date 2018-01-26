@@ -7,5 +7,5 @@
 
 'use strict';
 
-phpLightCommentModule.directive('commentDirective', [function () {
+phpLightCommentModule.directive('phpLightComment', [function () {
 }]);

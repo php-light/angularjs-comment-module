@@ -7,8 +7,8 @@
 
 'use strict';
 
-phpLightCommentModule.directive('listCommentDirective', ['$rootScope', '$parse', 'phpLightCommentFactory',
-    function ($rootScope, $parse, phpLightCommentFactory) {
+phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightCommentFactory',
+    function ($rootScope, phpLightCommentFactory) {
     return {
         restrict: 'EA',
         templateUrl: function () {

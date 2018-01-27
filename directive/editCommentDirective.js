@@ -1,22 +1,22 @@
 /**
  * Created by iKNSA.
  * User: Khalid Sookia <khalidsookia@gmail.com>
- * Date: 21/01/2018
- * Time: 21:50
+ * Date: 26/01/2018
+ * Time: 23:37
  */
 
 'use strict';
 
-phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse', 'phpLightCommentFactory',
-    function ($rootScope, $parse, phpLightCommentFactory) {
+phpLightCommentModule.directive('phpLightCommentEdit', ['$rootScope', 'phpLightCommentFactory',
+    function ($rootScope, phpLightCommentFactory) {
         return {
             restrict: 'EA',
             templateUrl: function () {
-                if ($rootScope.phpLight && $rootScope.phpLight.comment && $rootScope.phpLight.comment.createTemplate) {
-                    return $rootScope.phpLight.comment.createTemplate;
+                if ($rootScope.phpLight && $rootScope.phpLight.comment && $rootScope.phpLight.comment.editTemplate) {
+                    return $rootScope.phpLight.comment.editTemplate;
                 }
 
-                return '/web/vendor/php-light-comment/template/form.html'
+                return '/web/vendor/php-light-comment/template/edit.html'
             },
             scope: {
                 identifier: '@identifier'
@@ -24,7 +24,7 @@ phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse'
             link: function (scope, element, attributes) {
                 scope.submit = function (comment) {
                     // @todo trigger comments reload on success or add to existing comments
-                    phpLightCommentFactory.create({parent: attributes.parent, identifier: attributes.identifier, comment: comment})
+                    phpLightCommentFactory.edit({parent: attributes.parent, identifier: attributes.identifier, comment: comment})
                         .then(
                             function () {
                             },
@@ -35,4 +35,4 @@ phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse'
                 }
             }
         };
-}]);
+    }]);

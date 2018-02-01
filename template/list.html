@@ -1,8 +1,9 @@
 <div class="php-light-comment comments">
-    <div class="comment" ng-repeat="comment in comments">
+    <div class="comment-list comment" ng-repeat="comment in comments">
         <php-light-comment-delete identifier="{{ comment.id }}"></php-light-comment-delete>
-        <p>{{ comment.comment }}</p>
-        <p>{{ comment.createdAt }}</p>
+        <p class="content">{{ comment.comment }}</p>
+        <p class="date">{{ comment.createdAt }}</p>
+        <p class="author"><a ng-href="mailto:{{ comment.createdBy.mail }}">{{ comment.createdBy.cn }}</a></p>
         <hr>
     </div>
 </div>

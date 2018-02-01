@@ -23,10 +23,14 @@ phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse'
             },
             link: function (scope, element, attributes) {
                 scope.submit = function (comment) {
-                    // @todo trigger comments reload on success or add to existing comments
                     phpLightCommentFactory.create({parent: attributes.parent, identifier: attributes.identifier, comment: comment})
                         .then(
-                            function () {
+                            function (response) {
+                                if (response.success) {
+                                    $rootScope.$emit('phpLightCommentNew', response.comment);
+                                } else {
+                                    $rootScope.$emit('phpLightCommentNew', false);
+                                }
                             },
                             function (error) {
                                 console.error(error)

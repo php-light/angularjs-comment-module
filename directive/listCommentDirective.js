@@ -35,6 +35,10 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
                     }
                 );
             });
+
+            $rootScope.$on('phpLightCommentNew', function (event, comment) {
+                scope.comments.unshift(comment);
+            });
         }
     };
 }]);

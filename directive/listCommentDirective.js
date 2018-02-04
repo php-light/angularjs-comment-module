@@ -19,12 +19,13 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
             return '/web/vendor/php-light-comment/template/list.html'
         },
         scope: {
-            identifier: '@identifier'
+            identifier: '@identifier',
+            canEdit: '@',
+            currentUser: '@'
         },
         link: function (scope, element, attributes) {
             scope.$watch('identifier', function (identifier) {
                 if (!identifier) return;
-
                 phpLightCommentFactory.findBy({parent: attributes.parent, identifier: identifier})
                     .then(
                     function (response) {

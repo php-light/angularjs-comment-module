@@ -1,7 +1,9 @@
 <div class="php-light-comment comments">
     <div class="comment-list comment" ng-repeat="comment in comments">
         <hr>
-        <php-light-comment-delete identifier="{{ comment.id }}"></php-light-comment-delete>
+        <php-light-comment-delete
+                identifier="{{ comment.id }}" ng-show="canEdit === 'true' || comment.createdBy.uid === currentUser"
+        ></php-light-comment-delete>
         <p class="content">{{ comment.comment }}</p>
         <p class="date">{{ comment.createdAt }}</p>
         <p class="author"><a ng-href="mailto:{{ comment.createdBy.mail }}">{{ comment.createdBy.cn }}</a></p>

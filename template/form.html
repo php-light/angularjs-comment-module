@@ -1,12 +1,14 @@
 <div class="php-light-comment create">
     <div class="container">
-        <form ng-submit="submit(comment)">
+        <form ng-submit="submit(comment);comment = ''">
             <div class="form-group">
                 <textarea name="comment" id="comment" title="New Comment" ng-model="comment"></textarea>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-success">
+                <input type="submit" class="btn btn-success" value="Post your comment"
+                       ng-disabled="comment === undefined || comment === ''"
+                >
             </div>
         </form>
     </div>

@@ -40,6 +40,14 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
             $rootScope.$on('phpLightCommentNew', function (event, comment) {
                 scope.comments.unshift(comment);
             });
+
+            $rootScope.$on('phpLightCommentDeleted', function (event, deletedCommentId) {
+                angular.forEach(scope.comments, function (comment, index) {
+                    if (comment.id === deletedCommentId) {
+                        scope.comments.splice(index, 1);
+                    }
+                });
+            });
         }
     };
 }]);

@@ -4,7 +4,20 @@
         <php-light-comment-delete
                 identifier="{{ comment.id }}" ng-show="canEdit === 'true' || comment.createdBy.uid === currentUser"
         ></php-light-comment-delete>
-        <p class="content">{{ comment.comment }}</p>
+        <div class="php-light-commen-edit" ng-click="editing = !editing" ng-init="updatedComment = comment.comment">edit</div>
+        <form ng-submit="edit(updatedComment, comment);editing=false; comment.comment = updatedComment" ng-show="editing">
+            <div class="form-group">
+                <textarea name="updatedComment" id="updatedComment" title="New Comment" ng-model="updatedComment"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Update this comment"
+                       ng-disabled="updatedComment === ''"
+                >
+            </div>
+        </form>
+
+        <p class="content" ng-show="!editing">{{ comment.comment }}</p>
         <p class="date">{{ comment.createdAt }}</p>
         <p class="author"><a ng-href="mailto:{{ comment.createdBy.mail }}">{{ comment.createdBy.cn }}</a></p>
     </div>

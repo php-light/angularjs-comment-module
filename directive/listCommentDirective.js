@@ -48,6 +48,17 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
                     }
                 });
             });
+
+            scope.edit = function (updatedComment, comment) {
+                phpLightCommentFactory.edit(updatedComment, comment).then(
+                    function (response) {
+                        console.log(response.data);
+                    },
+                    function (error) {
+                        console.error(error);
+                    }
+                );
+            }
         }
     };
 }]);

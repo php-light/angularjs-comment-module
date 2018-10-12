@@ -1,4 +1,9 @@
 <div class="php-light-comment comments">
+    <div class="comment-list comment loader" style="height: 45px;text-align: center;"
+         ng-if="phpLightCommentCreateWaiting"
+    >
+        <img src="/web/vendor/php-light-comment/images/spinner.gif" style="max-width: 100%;max-height: 100%;display: inline-block;">
+    </div>
     <div class="comment-list comment" ng-repeat="comment in comments">
         <hr>
         <php-light-comment-delete

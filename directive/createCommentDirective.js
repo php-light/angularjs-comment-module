@@ -23,6 +23,7 @@ phpLightCommentModule.directive('phpLightCommentCreate', ['$rootScope', '$parse'
             },
             link: function (scope, element, attributes) {
                 scope.submit = function (comment) {
+                    $rootScope.$emit('phpLightCommentCreateWaiting');
                     phpLightCommentFactory.create({parent: attributes.parent, identifier: attributes.identifier, comment: comment})
                         .then(
                             function (response) {

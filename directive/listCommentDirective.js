@@ -24,6 +24,24 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
             currentUser: '@'
         },
         link: function (scope, element, attributes) {
+
+            $rootScope.$on('phpLightCommentNew', function (event, comment) {
+                scope.comments.unshift(comment);
+                scope.phpLightCommentCreateWaiting = false;
+            });
+
+            $rootScope.$on('phpLightCommentDeleted', function (event, deletedCommentId) {
+                angular.forEach(scope.comments, function (comment, index) {
+                    if (comment.id === deletedCommentId) {
+                        scope.comments.splice(index, 1);
+                    }
+                });
+            });
+
+            $rootScope.$on('phpLightCommentCreateWaiting', function () {
+                scope.phpLightCommentCreateWaiting = true;
+            });
+
             scope.$watch('identifier', function (identifier) {
                 if (!identifier) return;
                 phpLightCommentFactory.findBy({parent: attributes.parent, identifier: identifier})
@@ -35,18 +53,6 @@ phpLightCommentModule.directive('phpLightCommentList', ['$rootScope', 'phpLightC
                         console.error(error)
                     }
                 );
-            });
-
-            $rootScope.$on('phpLightCommentNew', function (event, comment) {
-                scope.comments.unshift(comment);
-            });
-
-            $rootScope.$on('phpLightCommentDeleted', function (event, deletedCommentId) {
-                angular.forEach(scope.comments, function (comment, index) {
-                    if (comment.id === deletedCommentId) {
-                        scope.comments.splice(index, 1);
-                    }
-                });
             });
 
             scope.edit = function (updatedComment, comment) {
